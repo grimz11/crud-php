@@ -35,4 +35,5 @@ function CreateDb() {
   }else {
     echo "Error".mysqli_error($con);
   }
+  mysqli_close($con);
 }

@@ -1,20 +1,30 @@
 <?php
+include_once __DIR__."../../../config.php";
 
-require_once("/var/www/html/crud-php/db/dbconnection/connect.php");
-require_once("/var/www/html/crud-php/components/displayperson.component.php");
-// require_once __DIR__ . "../connect.php";
-// require_once __DIR__ . "/components/displayperson.component.php";
+require_once SITE_ROOT . "/db/dbconnection/connect.php";
 
 $con = CreateDb();
 
-if(isset($_POST['btnAdd'])) {
+if(filter_has_var(INPUT_POST, 'btnAdd')) {
   addPerson();
 }
 
 function addPerson() {
-  $sql = "SELECT * FROM persons";
+  $fullname = htmlentities($_POST['fullname']);
+  $birthday = htmlentities($_POST['birthday']);
+  $address1 = htmlentities($_POST['address1']);
 
-  if(mysqli_query($GLOBALS['con'], $sql)) {
-    echo "Successfuly fetched";
+  if($fullname && $birthday && $address1) {
+    $sql = "INSERT INTO persons(fullname,birthday,address1)
+           VALUES ('$fullname', '$birthday', '$address1')";
+ 
+   if(mysqli_query($GLOBALS['con'], $sql)) {
+      mysqli_close($GLOBALS['con']);
+   }else {
+     echo "Failed to add";
+   }  
+  }else {
+    echo "All Fields must be filled out!";
   }
+  
 }

@@ -1,21 +1,23 @@
 <?php
+include __DIR__."../../../config.php";
 
-require_once("/var/www/html/crud-php/db/dbconnection/connect.php");
-require_once("/var/www/html/crud-php/components/displayperson.component.php");
-// require_once __DIR__ . "../connect.php";
-// require_once __DIR__ . "/components/displayperson.component.php";
+require_once SITE_ROOT . "/db/dbconnection/connect.php";
 
 $con = CreateDb();
 
-// if(isset($_POST['btnDisplay'])) {
-//   getPersons();
-// }
+if(filter_has_var(INPUT_POST, 'btnEditPerson')) {
+  ?> session_start(); <?php
+  echo "Hello";
+  // $_SESSION['name'] = 
+  header('Location: pages/edit.php');
+}
 
 function getPersons() {
   $sql = "SELECT * FROM persons";
   $res = mysqli_query($GLOBALS['con'], $sql);
 
   if(mysqli_num_rows($res) > 0 ) {
+    mysqli_close($GLOBALS['con']);
     return $res;
   }
 }
