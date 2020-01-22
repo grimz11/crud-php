@@ -6,18 +6,29 @@ require_once SITE_ROOT . "/db/dbconnection/connect.php";
 $con = CreateDb();
 
 if(filter_has_var(INPUT_POST, 'btnEditPerson')) {
-  echo "btnEditPerson";
+  editPerson();
+  header('Location: ../index.php');
 }
 
-function deletePerson() {
-  $id = htmlentities((int)$_POST['btnDelPerson']);
 
-  if($id) {
-    $sql = "DELETE FROM persons WHERE id='$id'";
+function editPerson() {
+  session_start();
+  $id = $_SESSION['id'];
+  $fullname = htmlentities($_POST['editName']);
+  $birthday = htmlentities($_POST['editBirthday']);
+  $address1 = htmlentities($_POST['editAddress']);
 
+  if($fullname && $birthday && $address1 && $id) {
+    $sql = "UPDATE persons SET fullname = '$fullname', birthday = '$birthday', address1 = '$address1' WHERE id = '$id' ";
+    
     if(mysqli_query($GLOBALS['con'], $sql)) {
-      mysqli_close($GLOBALS['con']);
-    }
+        mysqli_close($GLOBALS['con']);
+        session_destroy();
+        // echo "successfully updated";
+    }else {
+      echo "Faild to update";
+    }  
+  }else {
+    echo "All Fields must be filled out!";
   }
-  
 }
