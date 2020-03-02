@@ -23,7 +23,9 @@ function CreateDb() {
         id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         fullname VARCHAR(25) NOT NULL,
         birthday VARCHAR(25),
-        address1 VARCHAR(25)
+        address1 VARCHAR(25),
+        email VARCHAR(50),
+        pass VARCHAR(50)
       );
     ";
   

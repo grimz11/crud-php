@@ -13,10 +13,12 @@ function addPerson() {
   $fullname = htmlentities($_POST['fullname']);
   $birthday = htmlentities($_POST['birthday']);
   $address1 = htmlentities($_POST['address1']);
+  $email = htmlentities($_POST['email']);
+  $password = htmlentities($_POST['password']);
 
   if($fullname && $birthday && $address1) {
-    $sql = "INSERT INTO persons(fullname,birthday,address1)
-           VALUES ('$fullname', '$birthday', '$address1')";
+    $sql = "INSERT INTO persons(fullname,birthday,address1, email, pass)
+           VALUES ('$fullname', '$birthday', '$address1', '$email', '$password')";
  
    if(mysqli_query($GLOBALS['con'], $sql)) {
       mysqli_close($GLOBALS['con']);

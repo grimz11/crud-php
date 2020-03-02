@@ -17,6 +17,14 @@ function addPersonComponent() {
             <label for="address">Address</label>
             <input type="text" class="form-control form-control-lg" placeholder="Enter Address..." name="address1" >
           </div>
+          <div className="form-group">
+            <label for="address">Email</label>
+            <input type="email" class="form-control form-control-lg" placeholder="Enter Email..." name="email" >
+          </div>
+          <div className="form-group">
+            <label for="address">Password</label>
+            <input type="password" class="form-control form-control-lg" placeholder="Enter Password..." name="password" >
+          </div>
         </form>
       </div>
     </div>
